@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #f8d7da;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            color: #b35a69;
+            font-size: 32px;
+        }
+
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            width: 300px;
+        }
+
+        #screen {
+            height: 60px;
+            font-size: 20px;
+            text-align: right;
+            padding: 15px;
+            border: none;
+            background-color: #f7e4e8;
+            color: #b35a69;
+            border-radius: 20px 20px 0 0;
+            overflow-x: auto;
+            box-sizing: border-box;
+        }
+
+        #screen::-webkit-scrollbar {
+            display: none;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #f8a5b6;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #f3819e;
+        }
+
+        button:active {
+            background-color: #dd6b88;
+            transform: scale(0.95);
+        }
+
+        td[colspan="4"] {
+            padding: 0;
+        }
+
+        td[colspan="4"] #screen {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>CALCULATOR</h1>
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="4"><div id="screen"></div></td>
+            </tr>
+            <tr>
+                <td><button onclick="clickButton('7')">7</button></td>
+                <td><button onclick="clickButton('8')">8</button></td>
+                <td><button onclick="clickButton('9')">9</button></td>
+                <td><button onclick="clickButton('/')">/</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="clickButton('4')">4</button></td>
+                <td><button onclick="clickButton('5')">5</button></td>
+                <td><button onclick="clickButton('6')">6</button></td>
+                <td><button onclick="clickButton('*')">*</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="clickButton('1')">1</button></td>
+                <td><button onclick="clickButton('2')">2</button></td>
+                <td><button onclick="clickButton('3')">3</button></td>
+                <td><button onclick="clickButton('+')">+</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="clickButton('.')">.</button></td>
+                <td><button onclick="clickButton('0')">0</button></td>
+                <td><button onclick="clickEvaluate()">=</button></td>
+                <td><button onclick="clickButton('-')">-</button></td>
+            </tr>
+            <tr>
+                <td colspan="4"><button onclick="clearContent()" style="width: 100%; border-radius: 20px;">C</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function clickButton(value) {
+            const screenContent = document.getElementById("screen");
+            if (['+', '-', '*', '/'].includes(value)) {
+                screenContent.innerHTML += ` ${value} `;
+            } else {
+                screenContent.innerHTML += value;
+            }
+        }
+
+        function clickEvaluate() {
+            const expression = document.getElementById("screen").innerHTML;
+            try {
+                const result = eval(expression);
+                document.getElementById("screen").innerHTML = result;
+            } catch (error) {
+                document.getElementById("screen").innerHTML = "Error";
+            }
+        }
+
+        function clearContent() {
+            document.getElementById("screen").innerHTML = "";
+        }
+    </script>
+</body>
+</html>
